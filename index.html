@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="refresh" content="600">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<script>
+    // Function to make the API request and handle data display
+    function fetchData() {
+      fetch('https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC') // Replace with your API endpoint
+        .then(response => response.json())
+        .then(data => {
+          // Iterate over the data and generate HTML elements for each item
+          const dataContainer = document.getElementById('data-container');
+          data.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.textContent = JSON.stringify(item);
+            dataContainer.appendChild(itemElement);
+          });
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
+    }
+
+    // Call the fetchData function when the page is loaded
+    document.addEventListener('DOMContentLoaded', fetchData);
+  </script>
+  
+</body>
+</html>
