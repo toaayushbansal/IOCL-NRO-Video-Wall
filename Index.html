@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta http-equiv="refresh" content="600">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     function getTime() {
       var date = new Date();
@@ -23,5 +24,28 @@
 <body>
   <h1>Server Time:</h1>
   <div id="server-time"></div>
+   <div id="data-container"></div>
+
+  <script>
+    // Function to make the API request and update the HTML content
+    function fetchData() {
+      $.ajax({
+        url: 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi' // Replace with your API endpoint
+        method: 'GET',
+        success: function(data) {
+          // Update the HTML content with the received data
+          $('#data-container').html(JSON.stringify(data));
+        },
+        error: function(error) {
+          console.log('Error:', error);
+        }
+      });
+    }
+
+    // Call the fetchData function when the page is loaded
+    $(document).ready(function() {
+      fetchData();
+    });
+  </script>
 </body>
 </html>
