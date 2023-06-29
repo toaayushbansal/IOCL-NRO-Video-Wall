@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>API Data Display</title>
-     <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-    </style>
-    <script>
-        window.onload = function() {
-            // Make an API request
-            fetch('https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC')
-                .then(response => response.json())
-                .then(data => {
-                    // Process the API response and display the data
-                    displayData(data);
-                })
-                .catch(error => {
-                    console.log('Error:', error);
-                });
-        }
-
-        function displayData(data) {
-            // Access the specific properties of the data and display them in HTML
-            var output = '';
-            for (var i = 0; i < data.length; i++) {
-                output += '<div>';
-                output += '<h2>' + data[i].title + '</h2>';
-                output += '<p>' + data[i].description + '</p>';
-                output += '</div>';
-            }
-            document.getElementById('data-container').innerHTML = output;
-        }
-    </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>API Data Display</title>
 </head>
 <body>
-    <div id="data-container"></div>
-    data-container
+  <h1>API Data Display</h1>
+  <div id="data-container"></div>
+
+  <script>
+    // Function to make the API request and update the HTML content
+    function fetchData() {
+      const apiUrl = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC'; // Replace with your API endpoint
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const dataArray = parseDataToArray(data);
+          displayArray(dataArray);
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
+    }
+
+    // Function to parse the API data into an array
+    function parseDataToArray(data) {
+      // Modify this function based on the structure of your API response
+      // This example assumes that the API response is an array
+      return Array.isArray(data) ? data : [];
+    }
+
+    // Function to display the array on the web page
+    function displayArray(array) {
+      const dataContainer = document.getElementById('data-container');
+      const arrayHtml = array.map(item => `<p>${item}</p>`).join('');
+      dataContainer.innerHTML = arrayHtml;
+    }
+
+    // Call the fetchData function when the page is loaded
+    window.onload = fetchData;
+  </script>
 </body>
 </html>
