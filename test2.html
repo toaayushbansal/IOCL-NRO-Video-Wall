@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Data Display</title>
+    <script>
+        window.onload = function() {
+            // Make an API request
+            fetch('https://api.example.com/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Process the API response and display the data
+                    displayData(data);
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                });
+        }
+
+        function displayData(data) {
+            // Access the specific properties of the data and display them in HTML
+            var output = '';
+            for (var i = 0; i < data.length; i++) {
+                output += '<div>';
+                output += '<h2>' + data[i].title + '</h2>';
+                output += '<p>' + data[i].description + '</p>';
+                output += '</div>';
+            }
+            document.getElementById('data-container').innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <div id="data-container"></div>
+</body>
+</html>
