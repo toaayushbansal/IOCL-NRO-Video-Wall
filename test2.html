@@ -2,10 +2,16 @@
 <html>
 <head>
     <title>API Data Display</title>
+     <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
     <script>
         window.onload = function() {
             // Make an API request
-            fetch('https://api.example.com/data')
+            fetch('https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC')
                 .then(response => response.json())
                 .then(data => {
                     // Process the API response and display the data
