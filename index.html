@@ -31,6 +31,7 @@
   <h1>Server Time:</h1>
   <div id="server-time"></div>
    <div id="data-container"></div>
+    <div id="data-display"></div>
 
   <script>
     // Function to make the API request and update the HTML content
@@ -51,17 +52,17 @@ const recordsArray = data-container.records;
 
 // Access and display array elements
 recordsArray.forEach(item => {
-  item.id;
-  console.log(item.country);
-  console.log(item.state);
-  console.log(item.city);
-  console.log(item.station);
-  console.log(item.last_update);
-  console.log(item.pollutant_id);
-  console.log(item.pollutant_min);
-  console.log(item.pollutant_max);
-  console.log(item.pollutant_avg);
-  console.log(item.pollutant_unit);
+  data-display.id=item.id;
+  data-display.country=item.country;
+  data-display.state=item.state;
+  data-display.city=item.city;
+ data-display.station=item.station;
+ data-display.last_update=item.last_update;
+ data-display.pollutant_id=item.pollutant_id;
+  data-display.pollutant_min=item.pollutant_min;
+  data-display.pollutant_max=item.pollutant_max;
+ data-display.pollutant_avg=item.pollutant_avg;
+  data-display.pollutant_unit=item.pollutant_unit;
 });
     // Call the fetchData function when the page is loaded
     $(document).ready(function() {
