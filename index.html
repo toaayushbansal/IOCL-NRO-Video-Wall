@@ -31,7 +31,7 @@
   <h1>Server Time:</h1>
   <div id="server-time"></div>
    <div id="data-container"></div>
-    <div id="data-display"></div>
+    <div id="datadisplay"></div>
 
   <script>
     // Function to make the API request and update the HTML content
@@ -51,17 +51,17 @@
 const recordsArray = data-container.records;
 
 for(i=0;i<recordsArray.length;i++) 
- {data-display[i].id=recordsArray[i].id;
-  data-display[i].country=recordsArray[i].country;
-  data-display[i].state=recordsArray[i].state;
- data-display[i].city=recordsArray[i].city;
- data-display[i].station=recordsArray[i].station;
- data-display[i].last_update=recordsArray[i].last_update;
- data-display[i].pollutant_id=recordsArray[i].pollutant_id;
-  data-display[i].pollutant_min=recordsArray[i].pollutant_min;
- data-display[i].pollutant_max=recordsArray[i].pollutant_max;
- data-display[i].pollutant_avg=recordsArray[i].pollutant_avg;
-  data-display[i].pollutant_unit=recordsArray[i].pollutant_unit;
+ {datadisplay[i].id=recordsArray[i].id;
+  datadisplay[i].country=recordsArray[i].country;
+  datadisplay[i].state=recordsArray[i].state;
+ datadisplay[i].city=recordsArray[i].city;
+ datadisplay[i].station=recordsArray[i].station;
+ datadisplay[i].last_update=recordsArray[i].last_update;
+ datadisplay[i].pollutant_id=recordsArray[i].pollutant_id;
+  datadisplay[i].pollutant_min=recordsArray[i].pollutant_min;
+ datadisplay[i].pollutant_max=recordsArray[i].pollutant_max;
+ datadisplay[i].pollutant_avg=recordsArray[i].pollutant_avg;
+  datadisplay[i].pollutant_unit=recordsArray[i].pollutant_unit;
  }
 
     // Call the fetchData function when the page is loaded
