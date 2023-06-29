@@ -47,7 +47,22 @@
         }
       });
     }
+const recordsArray = data-container.records;
 
+// Access and display array elements
+recordsArray.forEach(item => {
+  console.log(item.id);
+  console.log(item.country);
+  console.log(item.state);
+  console.log(item.city);
+  console.log(item.station);
+  console.log(item.last_update);
+  console.log(item.pollutant_id);
+  console.log(item.pollutant_min);
+  console.log(item.pollutant_max);
+  console.log(item.pollutant_avg);
+  console.log(item.pollutant_unit);
+});
     // Call the fetchData function when the page is loaded
     $(document).ready(function() {
       fetchData();
