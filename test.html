@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Refresh Counter</title>
+    <script>
+        function refreshPage() {
+            setTimeout(function () {
+                location.reload();
+            }, 30000); // Refresh every 30 seconds (30,000 milliseconds)
+        }
+    </script>
+</head>
+<body onload="refreshPage()">
+    <h1>Auto Refresh Counter</h1>
+    <h2 id="counter">0</h2>
+
+    <script>
+        // Get the counter element
+        var counterElement = document.getElementById("counter");
+
+        // Retrieve the current count value from local storage or set it to 0
+        var count = parseInt(localStorage.getItem("count")) || 0;
+
+        // Increase the count
+        count++;
+
+        // Update the counter element and store the new count in local storage
+        counterElement.textContent = count;
+        localStorage.setItem("count", count);
+    </script>
+</body>
+</html>
