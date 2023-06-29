@@ -28,7 +28,8 @@
     function parseDataToArray(data) {
       // Modify this function based on the structure of your API response
       // This example assumes that the API response is an array
-      return Array.isArray(data) ? data : [];
+          const Array = JSON.parse(data);
+      return Array;
     }
 
     // Function to display the array on the web page
