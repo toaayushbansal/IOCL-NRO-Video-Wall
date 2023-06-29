@@ -50,20 +50,20 @@
     }
 const recordsArray = data-container.records;
 
-// Access and display array elements
-recordsArray.forEach(item => {
-  data-display.id=item.id;
-  data-display.country=item.country;
-  data-display.state=item.state;
-  data-display.city=item.city;
- data-display.station=item.station;
- data-display.last_update=item.last_update;
- data-display.pollutant_id=item.pollutant_id;
-  data-display.pollutant_min=item.pollutant_min;
-  data-display.pollutant_max=item.pollutant_max;
- data-display.pollutant_avg=item.pollutant_avg;
-  data-display.pollutant_unit=item.pollutant_unit;
-});
+for(i=0;i<recordsArray.length;i++) 
+ {data-display[i].id=recordsArray[i].id;
+  data-display[i].country=recordsArray[i].country;
+  data-display[i].state=recordsArray[i].state;
+ data-display[i].city=recordsArray[i].city;
+ data-display[i].station=recordsArray[i].station;
+ data-display[i].last_update=recordsArray[i].last_update;
+ data-display[i].pollutant_id=recordsArray[i].pollutant_id;
+  data-display[i].pollutant_min=recordsArray[i].pollutant_min;
+ data-display[i].pollutant_max=recordsArray[i].pollutant_max;
+ data-display[i].pollutant_avg=recordsArray[i].pollutant_avg;
+  data-display[i].pollutant_unit=recordsArray[i].pollutant_unit;
+ }
+
     // Call the fetchData function when the page is loaded
     $(document).ready(function() {
       fetchData();
