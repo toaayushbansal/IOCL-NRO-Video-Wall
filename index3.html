@@ -6,7 +6,7 @@
         // Function to fetch API data and display it in HTML
         function fetchData() {
             // API endpoint URL
-            var apiUrl = 'https://api.example.com/data';
+            var apiUrl = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC';
 
             // Make a request to the API
             fetch(apiUrl)
@@ -28,7 +28,6 @@
 </head>
 <body>
     <h1>API Data Display</h1>
-    <button onclick="fetchData()">Fetch Data</button>
     <div id="output"></div>
 </body>
 </html>
