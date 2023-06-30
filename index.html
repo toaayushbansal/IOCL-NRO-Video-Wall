@@ -31,6 +31,7 @@
   <h1>Server Time:</h1>
   <div id="server-time"></div>
    <div id="datacontainer"></div>
+   <div id="output"></div>
 
   <script>
     // Function to make the API request and update the HTML content
@@ -40,7 +41,14 @@
         method: 'GET',
         success: function(data) {
           // Update the HTML content with the received data
-          $('#datacontainer').html(JSON.stringify(data));
+          $('#datacontainer').html(JSON.parse(data));
+var result = "";
+      for (let i=0,i<7,i++) {
+          result += "<strong>" + datacontainer.records[i].pollutant_id + ":</strong> " + datacontainer.records[i].pollutant_avg + "<br>";
+           document.getElementById("output").innerHTML = result;
+        }
+
+          
         },
         error: function(error) {
           console.log('Error:', error);
