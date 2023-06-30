@@ -43,7 +43,7 @@
           // Update the HTML content with the received data
           $('#datacontainer').html(JSON.parse(data));
 var result = "";
-      for (let i=0,i<7,i++) {
+      for (i=0,i<7,i++) {
           result += "<strong>" + datacontainer.records[i].pollutant_id + ":</strong> " + datacontainer.records[i].pollutant_avg + "<br>";
            document.getElementById("output").innerHTML = result;
         }
