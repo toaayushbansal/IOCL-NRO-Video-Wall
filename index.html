@@ -42,20 +42,17 @@
         success: function(data) {
           // Update the HTML content with the received data
           $('#datacontainer').html(JSON.parse(data));
-var result = "";
-      for (i=0,i<7,i++) {
-          result += "<strong>" + datacontainer.records[i].pollutant_id + ":</strong> " + datacontainer.records[i].pollutant_avg + "<br>";
-           document.getElementById("output").innerHTML = result;
-        }
-
-          
         },
         error: function(error) {
           console.log('Error:', error);
         }
       });
     }
-
+var result = "";
+      for (i=0,i<7,i++) {
+          result += "<strong>" + datacontainer.records[i].pollutant_id + ":</strong> " + datacontainer.records[i].pollutant_avg + "<br>";
+           document.getElementById("output").innerHTML = result;
+        }
     // Call the fetchData function when the page is loaded
     $(document).ready(function() {
       fetchData();
