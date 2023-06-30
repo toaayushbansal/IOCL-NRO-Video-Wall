@@ -1,62 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="refresh" content="600">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    function getTime() {
-      var date = new Date();
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var seconds = date.getSeconds();
-
-      hours = (hours < 10) ? "0" + hours : hours;
-      minutes = (minutes < 10) ? "0" + minutes : minutes;
-      seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-      var time = hours + ":" + minutes + ":" + seconds;
-      document.getElementById("server-time").innerHTML = time;
-    }
-
-    setInterval(getTime, 1000); // Update time every second
-  </script>
-     <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-    </style>
+    <title>API Data Display</title>
+    <style>
+           body {
+               background-color: black;
+               color: white;
+           }
+       </style>
+  
 </head>
 <body>
-  <h1>Server Time:</h1>
-  <div id="server-time"></div>
-   <div id="datacontainer"></div>
-   <div id="output"></div>
+    <script>
+        // Function to fetch API data and display it in HTML
+        function fetchData() {
+            // API endpoint URL
+            var apiUrl = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC';
 
-  <script>
-    // Function to make the API request and update the HTML content
-    function fetchData() {
-      $.ajax({
-        url: 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC',
-        method: 'GET',
-        success: function(data) {
-          // Update the HTML content with the received data
-          $('#datacontainer').html(JSON.parse(data));
-        },
-        error: function(error) {
-          console.log('Error:', error);
+            // Make a request to the API
+            fetch(apiUrl)
+                .then(function(response) {
+                    // Parse the response as JSON
+                    return response.json();
+                })
+                .then(function(data) {
+                    // Display the data in HTML
+					console.log(JSON.stringify(data));
+					var output = document.getElementById('output');
+					output.innerHTML='City:  '+JSON.stringify(data.records[0].state).replace(/"/g, '')+'<br>'+'Station:   '+JSON.stringify(data.records[0].station).replace(/"/g, '')+'  last update:   '+JSON.stringify(data.records[0].last_update).replace(/"/g, '')+' hrs'+'<br>';
+                    for(var i=0;i<=6;i++){
+						output.innerHTML += JSON.stringify(data.records[i].pollutant_id).replace(/"/g, '')+':  '+JSON.stringify(data.records[i].pollutant_avg).replace(/"/g, '')+'<br>';}
+						var AQI = Math.max.apply(null, [data.records[0].pollutant_avg,data.records[1].pollutant_avg,data.records[2].pollutant_avg,data.records[3].pollutant_avg,data.records[4].pollutant_avg,data.records[5].pollutant_avg,data.records[6].pollutant_avg]);
+						output.innerHTML+='<h1>'+'AQI: '+AQI+'<br>'+'</h1>';	
+                })
+                .catch(function(error) {
+                    // Handle any errors
+                    console.log('Error:', error);
+                });
         }
-      });
-    }
-var result = "";
-      for (let j=0,j<7,j++) {
-          result += "<strong>" + datacontainer.records[j].pollutant_id + ":</strong> " + datacontainer.records[j].pollutant_avg + "<br>";
-           document.getElementById("output").innerHTML = result;
-        }
-    // Call the fetchData function when the page is loaded
-    $(document).ready(function() {
-      fetchData();
-    };
-  </script>
+		fetchData();
+    </script>
+    <h1>Air Quality Index (AQI)</h1>
+    <div id="output"></div>
 </body>
 </html>
