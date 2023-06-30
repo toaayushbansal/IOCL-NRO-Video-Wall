@@ -49,8 +49,8 @@
       });
     }
 var result = "";
-      for (let i=0,i<7,i++) {
-          result += "<strong>" + datacontainer.records[i].pollutant_id + ":</strong> " + datacontainer.records[i].pollutant_avg + "<br>";
+      for (let j=0,j<7,j++) {
+          result += "<strong>" + datacontainer.records[j].pollutant_id + ":</strong> " + datacontainer.records[j].pollutant_avg + "<br>";
            document.getElementById("output").innerHTML = result;
         }
     // Call the fetchData function when the page is loaded
