@@ -40,7 +40,7 @@
         method: 'GET',
         success: function(data) {
           // Update the HTML content with the received data
-          $('#datacontainer').html(JSON.parse(data));
+          $('#datacontainer').html(JSON.stingify(data));
         },
         error: function(error) {
           console.log('Error:', error);
