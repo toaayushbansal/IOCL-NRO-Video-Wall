@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Data Display</title>
+    <script>
+        // Function to fetch API data and display it in HTML
+        function fetchData() {
+            // API endpoint URL
+            var apiUrl = 'https://api.example.com/data';
+
+            // Make a request to the API
+            fetch(apiUrl)
+                .then(function(response) {
+                    // Parse the response as JSON
+                    return response.json();
+                })
+                .then(function(data) {
+                    // Display the data in HTML
+                    var output = document.getElementById('output');
+                    output.innerHTML = JSON.stringify(data);
+                })
+                .catch(function(error) {
+                    // Handle any errors
+                    console.log('Error:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>API Data Display</h1>
+    <button onclick="fetchData()">Fetch Data</button>
+    <div id="output"></div>
+</body>
+</html>
