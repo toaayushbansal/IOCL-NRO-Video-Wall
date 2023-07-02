@@ -1,16 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>API Data Display</title>
+    <title>IOCL NRO TERRACE LED VIDEO WALL</title>
     <style>
            body {
                background-color: black;
-               color: white;
+               color: green;
            }
        </style>
-  
+  <script>
+       function refreshPage() {
+           setTimeout(function () {
+               location.reload();
+           }, 1200000); // Refresh every 30 minutes (12,00,000 milliseconds)
+       }
+   </script>
+	   
+	   <script>
+		   function showIST() {
+		         var date = new Date();
+		         var options = {
+		           timeZone: 'Asia/Kolkata',
+		           weekday: 'long',
+		           year: 'numeric',
+		           month: 'long',
+		           day: 'numeric',
+		           hour12: true,
+		           hour: 'numeric',
+		           minute: 'numeric',
+		           second: 'numeric'
+		         };
+		         var istDateTime = date.toLocaleString('en-US', options);
+		         document.getElementById("istDateTime").textContent = istDateTime;
+		       }
+		       setInterval(showIST, 1000); // Update every second
+	     </script>
+		   
+		   <script>
+		       function showWeather() {
+		         var weather_apiUrl= 'https://api.openweathermap.org/data/3.0/onecall?lat=28.558941314219886&lon=77.20773339746721&exclude=minutely,hourly,daily&units=metric&appid=0aa5c0ce85d3f1b066c7e95e793a89a5';
+
+		         fetch(weather_apiUrl)
+		           .then(weather_response => weather_response.json())
+		           .then(weather_data => {
+					   console.log(JSON.stringify(weather_data));
+		             var temperature = weather_data.current.temp;
+					 var feels_like = weather_data.current.feels_like;
+		             var windSpeed = weather_data.current.wind_speed;
+		             var humidity = weather_data.current.humidity;
+
+		             document.getElementById("temperature").textContent = temperature.toFixed(1) + ' °C';
+					 document.getElementById("feels_like").textContent = feels_like.toFixed(1) + ' °C';
+		             document.getElementById("windSpeed").textContent = windSpeed + ' m/s';
+		             document.getElementById("humidity").textContent = humidity + '%';
+		           })
+		           .catch(error => console.log('Error:', error));
+		       }
+
+		       showWeather();
+		       setInterval(showWeather, 1800000); // Update every 30 minute
+		     </script>
+		   
+		   
 </head>
-<body>
+<body onload="refreshPage()">
     <script>
         // Function to fetch API data and display it in HTML
         function fetchData() {
@@ -27,11 +80,26 @@
                     // Display the data in HTML
 					console.log(JSON.stringify(data));
 					var output = document.getElementById('output');
-					output.innerHTML='City:  '+JSON.stringify(data.records[0].state).replace(/"/g, '')+'<br>'+'Station:   '+JSON.stringify(data.records[0].station).replace(/"/g, '')+'  last update:   '+JSON.stringify(data.records[0].last_update).replace(/"/g, '')+' hrs'+'<br>';
+			
                     for(var i=0;i<=6;i++){
-						output.innerHTML += JSON.stringify(data.records[i].pollutant_id).replace(/"/g, '')+':  '+JSON.stringify(data.records[i].pollutant_avg).replace(/"/g, '')+'<br>';}
+						output.innerHTML += '<p style="font-size:26px;">'+'        Avg.   '+JSON.stringify(data.records[i].pollutant_id).replace(/"/g, '')+':  '+JSON.stringify(data.records[i].pollutant_avg).replace(/"/g, '')+';        '+'</p>';}
 						var AQI = Math.max.apply(null, [data.records[0].pollutant_avg,data.records[1].pollutant_avg,data.records[2].pollutant_avg,data.records[3].pollutant_avg,data.records[4].pollutant_avg,data.records[5].pollutant_avg,data.records[6].pollutant_avg]);
-						output.innerHTML+='<h1>'+'AQI: '+AQI+'<br>'+'</h1>';	
+						var AQI_Status;
+						
+						if(AQI<=50){AQI_Status="GOOD";} 
+						else 
+							{if(AQI<=100){AQI_Status="SATISFACTORY";}
+						else
+							{if(AQI<=200){AQI_Status="MODERATE";}
+						else
+							{if(AQI<=300){AQI_Staus="POOR";}
+						else
+							{if(AQI<=400){AQI_Staus="VERY POOR";}
+						else
+							{if(AQI>400){AQI_Status="SEVERE";}}}}}}
+						
+						output.innerHTML+='<h1>'+'AQI: '+AQI+"       "+AQI_Status +'<br>'+'</h1>';	
+						output.innerHTML+='<h4>'+'City:  '+JSON.stringify(data.records[0].state).replace(/"/g, '')+'         Station:   '+JSON.stringify(data.records[0].station).replace(/"/g, '')+'  last update:   '+JSON.stringify(data.records[0].last_update).replace(/"/g, '')+' hrs'+'</h4>';
                 })
                 .catch(function(error) {
                     // Handle any errors
@@ -40,7 +108,32 @@
         }
 		fetchData();
     </script>
-    <h1>Air Quality Index (AQI)</h1>
+    <h1>Real Time Air Quality Index (AQI)</h1>
     <div id="output"></div>
+	<h5>source: data.gov.in</h5>
+    <h1 id="istDateTime"></h1>
+	
+    <h1>Delhi Weather:</h1>
+     <p>Temperature: <span id="temperature"></span></p>
+	 <p>Feels Like: <span id="feels_like"></span></p>
+     <p>Wind Speed: <span id="windSpeed"></span></p>
+     <p>Humidity: <span id="humidity"></span></p>
+	
+	 <h5 id="counter">0</h5>
+
+	    <script>
+	        // Get the counter element
+	        var counterElement = document.getElementById("counter");
+
+	        // Retrieve the current count value from local storage or set it to 0
+	        var count = parseInt(localStorage.getItem("count")) || 0;
+
+	        // Increase the count
+	        count++;
+
+	        // Update the counter element and store the new count in local storage
+	        counterElement.textContent = count;
+	        localStorage.setItem("count", count);
+	    </script>
 </body>
 </html>
