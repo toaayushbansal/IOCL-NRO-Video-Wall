@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Data Display</title>
+    <style>
+           body {
+               background-color: yellow;
+               color: black;
+           }
+       </style>
+		   
+		   <script>
+		       function showWeather() {
+		         var weather_apiUrl= 'https://api.openweathermap.org/data/3.0/onecall?lat=28.558941314219886&lon=77.20773339746721&exclude=minutely,hourly,daily&units=metric&appid=0aa5c0ce85d3f1b066c7e95e793a89a5';
+
+		         fetch(weather_apiUrl)
+		           .then(weather_response => weather_response.json())
+		           .then(weather_data => {
+					   console.log(JSON.stringify(weather_data));
+		             var temperature = weather_data.current.temp;
+					 var feels_like = weather_data.current.feels_like;
+		             var windSpeed = weather_data.current.wind_speed;
+		             var humidity = weather_data.current.humidity;
+
+		             document.getElementById("temperature").textContent = temperature.toFixed(1) + ' °C';
+					 document.getElementById("feels_like").textContent = feels_like.toFixed(1) + ' °C';
+		             document.getElementById("windSpeed").textContent = windSpeed + ' m/s';
+		             document.getElementById("humidity").textContent = humidity + '%';
+		           })
+		           .catch(error => console.log('Error:', error));
+		       }
+
+		       showWeather();
+		       setInterval(showWeather, 1800000); // Update every 30 minute
+		     </script>	   
+</head>
+<body>
+     <h1 style="font-size: 100px;">Temp: <span id="temperature"></span></h1>
+	 <h1 style="font-size: 100px;">Feels Like: <span id="feels_like"></span></h1>
+     <h1 style="font-size: 100px;">Wind Speed: <span id="windSpeed"></span></h1>
+     <h1 style="font-size: 100px;">Humidity: <span id="humidity"></span></h1>
+</body>
+</html>

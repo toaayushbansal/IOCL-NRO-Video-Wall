@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IST Display</title>
+    <style>
+           body {
+               background-color: yellow;
+               color: black;
+           }
+       </style>
+	   
+	   <script>
+		   function showIST() {
+		         var date = new Date();
+		         var options = {
+		           timeZone: 'Asia/Kolkata',
+		           weekday: 'long',
+		           year: 'numeric',
+		           month: 'long',
+		           day: 'numeric',
+		           hour12: true,
+		           hour: 'numeric',
+		           minute: 'numeric',
+		           second: 'numeric'
+		         };
+		         var istDateTime = date.toLocaleString('en-US', options);
+		         document.getElementById("istDateTime").textContent = istDateTime;
+		       }
+		       setInterval(showIST, 1000); // Update every second
+	     </script>
+		   
+</head>
+<body>
+    
+    <h1 style="font-size: 100px;" id="istDateTime"></h1>
+	
+</body>
+</html>
