@@ -50,7 +50,7 @@
 						else
 							{if(AQI>400){AQI_Status="SEVERE";}}}}}}
 						
-						output.innerHTML+='<h1 style="font-size: 100px;">'+'AQI: '+AQI+"       "+AQI_Status +'<br>'+'</h1>';	
+						output.innerHTML+='<h1 style="font-size: 100px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>';	
 						
 						output.innerHTML += '<marquee>'+'<h1 style="font-size: 75px;">'+JSON.stringify(data.records[0].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[0].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[1].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[1].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[2].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[2].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[3].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[3].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[4].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[4].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[5].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[5].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[6].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[6].pollutant_avg).replace(/"/g, '')+'        '+'</h1>'+'</marquee>';
 						
