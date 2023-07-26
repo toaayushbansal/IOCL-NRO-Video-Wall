@@ -7,7 +7,7 @@
                background-color: yellow;
                color: black;
 			   font-family:verdana;
-			   line-height: 0.2;
+			   line-height: 1;
            }
        </style>
   <script>
@@ -96,9 +96,9 @@
 							else
 								{if(AQI>400){AQI_Status="SEVERE";}}}}}}
 						
-							output.innerHTML+='<marquee behaviour="scroll" scrollamount="12">'+'<h1 style="font-size: 90px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>'+'</marquee>';	
+							output.innerHTML+='<h1 style="font-size: 90px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>';	
 						
-							output.innerHTML += '<marquee behaviour="scroll" scrollamount="12">'+'<h1 style="font-size: 50px;">'+JSON.stringify(data.records[0].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[0].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[1].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[1].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[2].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[2].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[3].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[3].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[4].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[4].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[5].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[5].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[6].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[6].pollutant_avg).replace(/"/g, '')+'        '+'</h1>'+'</marquee>';
+							output.innerHTML += '<h1 style="font-size: 50px;">'+JSON.stringify(data.records[0].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[0].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[1].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[1].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[2].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[2].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[3].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[3].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[4].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[4].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[5].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[5].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[6].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[6].pollutant_avg).replace(/"/g, '')+'        '+'</h1>';
 						
 							/*output.innerHTML+='<h2>'+'City:  '+JSON.stringify(data.records[0].state).replace(/"/g, '')+'         Station:   '+JSON.stringify(data.records[0].station).replace(/"/g, '')+'  last update:   '+JSON.stringify(data.records[0].last_update).replace(/"/g, '')+' hrs'+'</h2>'; */
 	                })
@@ -162,15 +162,15 @@
 <body onload="refreshPage()">
 	<!-- <h3>Source: Real Time Air Quality Index (AQI) from data.gov.in</h3>
 	 <h5 id="counter">0</h5> -->
-<MARQUEE behaviour="scroll" scrollamount="12"><h1 style="font-size: 50px;" id="istDateTime"></h1> </MARQUEE>
+<MARQUEE behavior="slide" scrollamount="15" direction="up"> <h1 style="font-size: 50px;" id="istDateTime"></h1> 
 	<span id="output"></span> 
 	
-	<MARQUEE behaviour="scroll" scrollamount="12"> <h1 style="font-size: 50px;">Today's India's Population: <span id="populationcount"></span> <!--As on <span id="populationdate"></span>--></h1></MARQUEE>
+	 <h1 style="font-size: 50px;">Today's India's Population: <span id="populationcount"></span> <!--As on <span id="populationdate"></span>--></h1>
 	
-	<MARQUEE behaviour="scroll" scrollamount="12"> <h1 style="font-size: 50px;">Temp: <span id="temperature"></span> 
+	<h1 style="font-size: 50px;">Temp: <span id="temperature"></span> 
 		        , Feels Like: <span id="feels_like"></span>
                 , Wind Speed: <span id="windSpeed"></span>
-                , Humidity: <span id="humidity"></span></h1></MARQUEE>
+                , Humidity: <span id="humidity"></span> </h1></MARQUEE>
 
 	
 
