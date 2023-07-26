@@ -96,7 +96,7 @@
 							else
 								{if(AQI>400){AQI_Status="SEVERE";}}}}}}
 						
-							output.innerHTML+='<h1 style="font-size: 90px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>';	
+							output.innerHTML+='<marquee behaviour="scroll" scrollamount="12">'+'<h1 style="font-size: 90px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>'+'</marquee>';	
 						
 							output.innerHTML += '<marquee behaviour="scroll" scrollamount="12">'+'<h1 style="font-size: 50px;">'+JSON.stringify(data.records[0].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[0].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[1].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[1].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[2].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[2].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[3].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[3].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[4].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[4].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[5].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[5].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[6].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[6].pollutant_avg).replace(/"/g, '')+'        '+'</h1>'+'</marquee>';
 						
@@ -162,7 +162,7 @@
 <body onload="refreshPage()">
 	<!-- <h3>Source: Real Time Air Quality Index (AQI) from data.gov.in</h3>
 	 <h5 id="counter">0</h5> -->
-<h1 style="font-size: 50px;" id="istDateTime"></h1> 
+<MARQUEE behaviour="scroll" scrollamount="12"><h1 style="font-size: 50px;" id="istDateTime"></h1> </MARQUEE>
 	<span id="output"></span> 
 	
 	<MARQUEE behaviour="scroll" scrollamount="12"> <h1 style="font-size: 50px;">Today's India's Population: <span id="populationcount"></span> <!--As on <span id="populationdate"></span>--></h1></MARQUEE>
