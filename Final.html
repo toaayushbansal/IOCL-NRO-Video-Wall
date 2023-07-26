@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NRO TERRACE LED VIDEO WALL</title>
+    <style>
+           body {
+               background-color: yellow;
+               color: black;
+			   font-family:verdana;
+			   line-height: 0.2;
+           }
+       </style>
+  <script>
+       function refreshPage() {
+           setTimeout(function () {
+               location.reload();
+           }, 1200000); // Refresh every 30 minutes (12,00,000 milliseconds)
+       }
+   </script>	   
+		
+	    <script>
+	 		   function showIST() {
+	 		         var date = new Date();
+	 		         var options = {
+	 		           timeZone: 'Asia/Kolkata',
+	 		           weekday: 'short',
+	 		           year: 'numeric',
+	 		           month: 'short',
+	 		           day: 'numeric',
+	 		           hour12: true,
+	 		           hour: 'numeric',
+	 		           minute: 'numeric',
+	 		           second: 'numeric'
+	 		         };
+	 		         var istDateTime = date.toLocaleString('en-IN', options);
+	 		         document.getElementById("istDateTime").textContent = istDateTime;
+	 		       }
+	 		       setInterval(showIST, 1000); // Update every second
+	 	     </script>
+		
+		
+		<script>
+				       function showWeather() {
+				         var weather_apiUrl= 'https://api.openweathermap.org/data/3.0/onecall?lat=28.558941314219886&lon=77.20773339746721&exclude=minutely,hourly,daily&units=metric&appid=0aa5c0ce85d3f1b066c7e95e793a89a5';
+
+				         fetch(weather_apiUrl)
+				           .then(weather_response => weather_response.json())
+				           .then(weather_data => {
+							   console.log(JSON.stringify(weather_data));
+				             var temperature = weather_data.current.temp;
+							 var feels_like = weather_data.current.feels_like;
+				             var windSpeed = weather_data.current.wind_speed;
+				             var humidity = weather_data.current.humidity;
+
+				             document.getElementById("temperature").textContent = temperature.toFixed(1) + ' °C';
+							 document.getElementById("feels_like").textContent = feels_like.toFixed(1) + ' °C';
+				             document.getElementById("windSpeed").textContent = windSpeed + ' m/s';
+				             document.getElementById("humidity").textContent = humidity + '%';
+				           })
+				           .catch(error => console.log('Error:', error));
+				       }
+
+				       showWeather();
+				       setInterval(showWeather, 1800000); // Update every 30 minute
+				     </script>
+		
+	    <script>
+	        // Function to fetch API data and display it in HTML
+	        function fetchData() {
+	            // API endpoint URL
+	            var apiUrl = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC';
+
+	            // Make a request to the API
+	            fetch(apiUrl)
+	                .then(function(response) {
+	                    // Parse the response as JSON
+	                    return response.json();
+	                })
+	                .then(function(data) {
+	                    // Display the data in HTML
+						console.log(JSON.stringify(data));
+						var output = document.getElementById('output');
+						
+							var AQI = Math.max.apply(null, [data.records[0].pollutant_avg,data.records[1].pollutant_avg,data.records[2].pollutant_avg,data.records[3].pollutant_avg,data.records[4].pollutant_avg,data.records[5].pollutant_avg,data.records[6].pollutant_avg]);
+							var AQI_Status;
+						
+							if(AQI<=50){AQI_Status="GOOD";} 
+							else 
+								{if(AQI<=100){AQI_Status="SATISFACTORY";}
+							else
+								{if(AQI<=200){AQI_Status="MODERATE";}
+							else
+								{if(AQI<=300){AQI_Staus="POOR";}
+							else
+								{if(AQI<=400){AQI_Staus="VERY POOR";}
+							else
+								{if(AQI>400){AQI_Status="SEVERE";}}}}}}
+						
+							output.innerHTML+='<h1 style="font-size: 90px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>';	
+						
+							output.innerHTML += '<marquee behaviour="scroll" scrollamount="12">'+'<h1 style="font-size: 50px;">'+JSON.stringify(data.records[0].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[0].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[1].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[1].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[2].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[2].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[3].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[3].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[4].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[4].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[5].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[5].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[6].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[6].pollutant_avg).replace(/"/g, '')+'        '+'</h1>'+'</marquee>';
+						
+							/*output.innerHTML+='<h2>'+'City:  '+JSON.stringify(data.records[0].state).replace(/"/g, '')+'         Station:   '+JSON.stringify(data.records[0].station).replace(/"/g, '')+'  last update:   '+JSON.stringify(data.records[0].last_update).replace(/"/g, '')+' hrs'+'</h2>'; */
+	                })
+	                .catch(function(error) {
+	                    // Handle any errors
+	                    console.log('Error:', error);
+	                });
+	        }
+			fetchData();
+	    </script>
+	
+	<script>
+		// function for digital population clock, code source; https://prc.mohfw.gov.in/
+		function calculatePopulation() 
+		{
+			var i, d, oneDayPopIncr, Difference_In_Time, Difference_In_Days, basePop, todaydate, todayPop;
+            var options1 = {
+                 timeZone: 'Asia/Kolkata',
+                 //weekday: 'short',
+                 year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                  //hour12: true,
+                //hour: 'numeric',
+                 //minute: 'numeric',
+                //second: 'numeric'
+         };
+			const monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+					'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+
+			const baseDate = new Date(2021, 01, 24, 00, 00, 00);
+			d = new Date();
+			todaydate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 00, 00, 00);
+			// To calculate the time difference of two dates 
+			Difference_In_Time = todaydate.getTime() - baseDate.getTime();
+
+			// To calculate the no. of days between two dates 
+			Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+			const gr = 0.0105; basePop = 1389485107;
+
+			for (i = 1; i <= Difference_In_Days; i++) 
+			{
+				if (i == 1) {
+					oneDayPopIncr = Math.ceil((basePop * gr) / 365);
+					todayPop = basePop + oneDayPopIncr;
+				}
+				if (i != 1) {
+					oneDayPopIncr = Math.ceil((todayPop * gr) / 365);
+					todayPop = todayPop + oneDayPopIncr;
+				}
+			}
+         document.getElementById("populationcount").textContent = todayPop.toLocaleString('en-IN');
+         document.getElementById("populationdate").textContent = todaydate.toLocaleString('en-IN', options1);
+		}
+		setInterval(calculatePopulation, 1000);
+	</script>
+		   
+</head>
+
+
+<body onload="refreshPage()">
+	<!-- <h3>Source: Real Time Air Quality Index (AQI) from data.gov.in</h3>
+	 <h5 id="counter">0</h5> -->
+<h1 style="font-size: 50px;" id="istDateTime"></h1> 
+	<span id="output"></span> 
+	
+	<MARQUEE behaviour="scroll" scrollamount="12"> <h1 style="font-size: 50px;">Today's India's Population: <span id="populationcount"></span> <!--As on <span id="populationdate"></span>--></h1></MARQUEE>
+	
+	<MARQUEE behaviour="scroll" scrollamount="12"> <h1 style="font-size: 50px;">Temp: <span id="temperature"></span> 
+		        , Feels Like: <span id="feels_like"></span>
+                , Wind Speed: <span id="windSpeed"></span>
+                , Humidity: <span id="humidity"></span></h1></MARQUEE>
+
+	
+
+	    <script>
+	        // Get the counter element
+	        var counterElement = document.getElementById("counter");
+
+	        // Retrieve the current count value from local storage or set it to 0
+	        var count = parseInt(localStorage.getItem("count")) || 0;
+
+	        // Increase the count
+	        count++;
+
+	        // Update the counter element and store the new count in local storage
+	        counterElement.textContent = count;
+	        localStorage.setItem("count", count);
+	    </script>
+</body>
+</html>
