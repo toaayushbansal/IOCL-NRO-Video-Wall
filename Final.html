@@ -63,12 +63,57 @@
 				       showWeather();
 				       setInterval(showWeather, 1800000); // Update every 30 minute
 				     </script>
+	<!--    <script>
+	 	        // Function to fetch API data and display it in HTML
+	 	        function fetchData() {
+	 	            // API endpoint URL
+	 	            var apiUrl = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC';
+
+	 	            // Make a request to the API
+	 	            fetch(apiUrl)
+	 	                .then(function(response) {
+	 	                    // Parse the response as JSON
+	 	                    return response.json();
+	 	                })
+	 	                .then(function(data) {
+	 	                    // Display the data in HTML
+	 						console.log(JSON.stringify(data));
+	 						var output = document.getElementById('output');
+						
+	 							var AQI = Math.max.apply(null, [data.records[0].pollutant_avg,data.records[1].pollutant_avg,data.records[2].pollutant_avg,data.records[3].pollutant_avg,data.records[4].pollutant_avg,data.records[5].pollutant_avg,data.records[6].pollutant_avg]);
+	 							var AQI_Status;
+						
+	 							if(AQI<=50){AQI_Status="GOOD";} 
+	 							else 
+	 								{if(AQI<=100){AQI_Status="SATISFACTORY";}
+	 							else
+	 								{if(AQI<=200){AQI_Status="MODERATE";}
+	 							else
+	 								{if(AQI<=300){AQI_Staus="POOR";}
+	 							else
+	 								{if(AQI<=400){AQI_Staus="VERY POOR";}
+	 							else
+	 								{if(AQI>400){AQI_Status="SEVERE";}}}}}}
+						
+	 							output.innerHTML+='<h1 style="font-size: 90px;">'+'AQI: '+AQI+"       "+AQI_Status +'</h1>';	
+						
+	 							/*output.innerHTML += '<h1 style="font-size: 50px;">'+JSON.stringify(data.records[0].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[0].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[1].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[1].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[2].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[2].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[3].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[3].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[4].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[4].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[5].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[5].pollutant_avg).replace(/"/g, '')+',        '+JSON.stringify(data.records[6].pollutant_id).replace(/"/g, '')+':     '+JSON.stringify(data.records[6].pollutant_avg).replace(/"/g, '')+'        '+'</h1>';
+						
+	 							output.innerHTML+='<h2>'+'City:  '+JSON.stringify(data.records[0].state).replace(/"/g, '')+'         Station:   '+JSON.stringify(data.records[0].station).replace(/"/g, '')+'  last update:   '+JSON.stringify(data.records[0].last_update).replace(/"/g, '')+' hrs'+'</h2>'; */
+	 	                })
+	 	                .catch(function(error) {
+	 	                    // Handle any errors
+	 	                    console.log('Error:', error);
+	 	                });
+	 	        }
+	 			fetchData();
+	 	    </script> -->
 		
 	    <script>
-	        // Function to fetch API data and display it in HTML
+	        // Function to fetch API data and display it in HTML from Air Quality Open Data Platform https://aqicn.org/data-platform/token/
 	        function fetchData() {
 	            // API endpoint URL
-	            var apiUrl = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bstate%5D=Delhi&filters%5Bstation%5D=Sri%20Aurobindo%20Marg%2C%20Delhi%20-%20DPCC';
+	            var apiUrl = 'https://api.waqi.info/feed/DELHI/?token=ab6297b2e2e591f3377c582fce9541c9d8acd22e';
 
 	            // Make a request to the API
 	            fetch(apiUrl)
@@ -81,7 +126,7 @@
 						console.log(JSON.stringify(data));
 						var output = document.getElementById('output');
 						
-							var AQI = Math.max.apply(null, [data.records[0].pollutant_avg,data.records[1].pollutant_avg,data.records[2].pollutant_avg,data.records[3].pollutant_avg,data.records[4].pollutant_avg,data.records[5].pollutant_avg,data.records[6].pollutant_avg]);
+						var AQI = data.data.aqi;
 							var AQI_Status;
 						
 							if(AQI<=50){AQI_Status="GOOD";} 
