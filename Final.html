@@ -213,22 +213,16 @@
 
 	<h1 style="font-size: 90px;">Air Quality & Weather Now</h1>
 	<span id="output"></span> 
-	
-	 <h1 style="font-size: 90px;">India's Population: <span id="populationcount"></span> <!--As on <span id="populationdate"></span>--></h1>
-	
 	<h1 style="font-size: 90px;">Temp: <span id="temperature"></span> 
 		        <br>Feels Like: <span id="feels_like"></span>
-               <!-- --><br>Wind Speed: <span id="windSpeed"></span>
+               <!-- --> <br>Wind Speed: <span id="windSpeed"></span>
                 <br>Humidity: <span id="humidity"></span> </h1>
-
-<h1 style="font-size: 90px;"><br>By Indian Oil Corporation Ltd, M.D.<br>Northern Regional Office</h1> 
-
+<h1 style="font-size: 90px;">India's Population: <span id="populationcount"></span> <!--As on <span id="populationdate"></span>--></h1>
+<h1 style="font-size: 60px;"><br>Issued in Public Interest By:<br>Indian Oil Corporation Ltd, M.D.<br>Northern Regional Office<br><br>Have A Nice Day...</h1>  
 
 </MARQUEE>
 
-	
-
-	    <script>
+<script>
 	        // Get the counter element
 	        var counterElement = document.getElementById("counter");
 
@@ -241,6 +235,7 @@
 	        // Update the counter element and store the new count in local storage
 	        counterElement.textContent = count;
 	        localStorage.setItem("count", count);
-	    </script>
+</script>
+
 </body>
 </html>
